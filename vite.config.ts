@@ -6,7 +6,7 @@ import { componentTagger } from "lovable-tagger";
 // IMPORTANT: set base to match the repo name for GitHub Pages
 // If your site will live at https://USERNAME.github.io/offer-install-site/
 // then base MUST be "/offer-install-site/"
-const repoBase = "/YOUR-REPO-NAME/";
+const repoBase = "/offer-install-suite/";
 
 export default defineConfig(({ mode }) => ({
   base: repoBase,

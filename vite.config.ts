@@ -4,11 +4,17 @@ import react from "@vitejs/plugin-react-swc";
 import path from "path";
 import { componentTagger } from "lovable-tagger";
 
-const repoBase = "/offer-install-suite/"; // repo name
-
 export default defineConfig(({ mode }) => ({
-  base: repoBase,
-  server: { host: "::", port: 8080 },
+  server: {
+    host: "::",
+    port: 8080,
+  },
+  // 👇 Important: project pages must use /<repo-name>/ as base in production
+  base: mode === "production" ? "/offer-install-suite/" : "/",
   plugins: [react(), mode === "development" && componentTagger()].filter(Boolean),
-  resolve: { alias: { "@": path.resolve(__dirname, "./src") } },
+  resolve: {
+    alias: {
+      "@": path.resolve(__dirname, "./src"),
+    },
+  },
 }));

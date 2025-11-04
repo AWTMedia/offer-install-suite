@@ -71,14 +71,16 @@ const Index = () => {
 
           {/* Video frame */}
           <Card className="mt-12 relative max-w-3xl mx-auto rounded-2xl overflow-hidden border shadow-[0_30px_120px_rgba(0,0,0,0.8)]">
-            {/* Replace src with your explainer video embed */}
             <div className="relative w-full" style={{ paddingTop: "56.25%" }}>
               <iframe
                 className="absolute inset-0 w-full h-full"
-                src="https://www.youtube.com/embed/XwzU4RikbGs?rel=0&modestbranding=1&playsinline=1"
+                // Privacy-enhanced domain improves Safari reliability
+                src="https://www.youtube-nocookie.com/embed/XwzU4RikbGs?rel=0&modestbranding=1&playsinline=1"
                 title="How the Install Works"
-                loading="lazy"
-                allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                // Don't lazy-load on Safari; it can prevent painting
+                // loading="lazy"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerPolicy="strict-origin-when-cross-origin"
                 allowFullScreen
               />
             </div>
@@ -90,6 +92,12 @@ const Index = () => {
               <div className="mt-1 text-[11px] leading-relaxed text-text-muted">
                 Exactly what gets installed in the sprint, how the pipeline
                 works, and what you'll be running after handover.
+              </div>
+              {/* Accessible fallback for content blockers */}
+              <div className="sr-only">
+                <a href="https://youtu.be/XwzU4RikbGs" target="_blank" rel="noopener">
+                  Watch on YouTube
+                </a>
               </div>
             </div>
           </Card>

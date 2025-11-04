@@ -1,25 +1,80 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64'%3E%3Ctext y='50%25' x='50%25' dominant-baseline='middle' text-anchor='middle'%3E⚡%3C/text%3E%3C/svg%3E">
+    <!-- Favicon (inline so GitHub Pages never 404s) -->
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64'%3E%3Ctext y='50%25' x='50%25' dominant-baseline='middle' text-anchor='middle'%3E⚡%3C/text%3E%3C/svg%3E"
+    />
+
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <title>Client Acquisition System Install | The Business Idea Studio</title>
-    <meta name="description" content="We install a working client acquisition and delivery system in your business in 30-45 days. A full revenue machine: avatar, offer, positioning, proof, pipeline, and close system." />
+    <meta
+      name="description"
+      content="We install a working client acquisition and delivery system in your business in 30-45 days. A full revenue machine: avatar, offer, positioning, proof, pipeline, and close system."
+    />
     <meta name="author" content="The Business Idea Studio" />
 
-    <meta property="og:title" content="Client Acquisition System Install | The Business Idea Studio" />
-    <meta property="og:description" content="Get a complete acquisition and delivery system installed in 30-45 days. Strategy, not content agency." />
+    <meta
+      property="og:title"
+      content="Client Acquisition System Install | The Business Idea Studio"
+    />
+    <meta
+      property="og:description"
+      content="Get a complete acquisition and delivery system installed in 30-45 days. Strategy, not content agency."
+    />
     <meta property="og:type" content="website" />
-    <meta property="og:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
+    <meta
+      property="og:image"
+      content="https://lovable.dev/opengraph-image-p98pqg.png"
+    />
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:site" content="@lovable_dev" />
-    <meta name="twitter:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
+    <meta
+      name="twitter:image"
+      content="https://lovable.dev/opengraph-image-p98pqg.png"
+    />
+
+    <!-- Guard against wallet extensions (e.g., Tron/EVM) throwing on redefining window.ethereum -->
+    <script>
+      window.addEventListener(
+        "error",
+        (e) => {
+          const msg = String(e?.error?.message || e?.message || "");
+          const src = String(e?.filename || "");
+          if (
+            msg.includes("Cannot redefine property: ethereum") ||
+            src.includes("evmAsk.js")
+          ) {
+            e.preventDefault();
+            console.warn("Ignored wallet extension error:", msg || src);
+          }
+        },
+        { capture: true }
+      );
+      window.addEventListener(
+        "unhandledrejection",
+        (e) => {
+          const msg = String(e?.reason?.message || e?.reason || "");
+          if (msg.includes("Cannot redefine property: ethereum")) {
+            e.preventDefault();
+            console.warn("Ignored wallet extension rejection:", msg);
+          }
+        },
+        { capture: true }
+      );
+    </script>
   </head>
 
   <body>
     <div id="root"></div>
+    <!-- Vite replaces this with the built asset path; keep leading slash so dev works. -->
     <script type="module" src="/src/main.tsx"></script>
+    <noscript>
+      This app requires JavaScript to run. Please enable JavaScript in your browser.
+    </noscript>
   </body>
 </html>

@@ -19,14 +19,27 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
       - uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: 'npm'
+
+      # Install deps from package.json (don’t fail if lockfile is out of date)
       - name: Install dependencies
         run: npm install --no-audit --no-fund
+
+      # Hard-ensure the Radix tooltip package is present (even if lock/cache is stale)
+      - name: Ensure Radix Tooltip present
+        run: |
+          if ! npm ls @radix-ui/react-tooltip >/dev/null 2>&1; then
+            npm install @radix-ui/react-tooltip@latest --save
+          fi
+          npm ls @radix-ui/react-tooltip || true
+
       - name: Build
         run: npm run build
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:

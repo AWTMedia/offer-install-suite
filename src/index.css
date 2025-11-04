@@ -2,23 +2,22 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here.
+   All colors MUST be HSL. */
 
 @layer base {
   :root {
     /* Dark professional theme with lime accent */
-    --background: 220 45% 7%; /* Deep ink blue */
-    --foreground: 43 48% 92%; /* Warm cream */
+    --background: 220 45% 7%;      /* Deep ink blue */
+    --foreground: 43 48% 92%;      /* Warm cream */
 
-    --card: 220 40% 10%; /* Slightly lighter than bg */
+    --card: 220 40% 10%;           /* Slightly lighter than bg */
     --card-foreground: 43 48% 92%;
 
     --popover: 220 40% 10%;
     --popover-foreground: 43 48% 92%;
 
-    --primary: 73 94% 61%; /* Vibrant lime accent */
+    --primary: 73 94% 61%;         /* Vibrant lime accent */
     --primary-foreground: 220 45% 7%;
 
     --secondary: 220 35% 15%;
@@ -27,25 +26,25 @@ All colors MUST be HSL.
     --muted: 220 30% 20%;
     --muted-foreground: 43 20% 65%;
 
-    --accent: 73 94% 61%; /* Lime accent */
+    --accent: 73 94% 61%;
     --accent-foreground: 220 45% 7%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 43 48% 92%;
 
-    --border: 220 30% 15%; /* Subtle border */
+    --border: 220 30% 15%;         /* Subtle border */
     --input: 220 30% 15%;
     --ring: 73 94% 61%;
 
     --radius: 0.75rem;
 
     /* Custom tokens for this design */
-    --card-glass: 220 40% 10% / 0.6; /* Semi-transparent cards */
-    --border-subtle: 0 0% 100% / 0.08; /* Very subtle borders */
-    --accent-glow: 73 94% 61% / 0.07; /* Subtle accent bg */
-    --text-dimmed: 0 0% 100% / 0.7;
-    --text-muted: 0 0% 100% / 0.5;
-    --text-subtle: 0 0% 100% / 0.4;
+    --card-glass: 220 40% 10% / 0.60;     /* Semi-transparent card bg */
+    --border-subtle: 0 0% 100% / 0.08;    /* Very subtle borders */
+    --accent-glow: 73 94% 61% / 0.07;     /* Subtle accent bg */
+    --text-dimmed: 0 0% 100% / 0.70;
+    --text-muted: 0 0% 100% / 0.50;
+    --text-subtle: 0 0% 100% / 0.40;
   }
 }
 
@@ -53,8 +52,28 @@ All colors MUST be HSL.
   * {
     @apply border-border;
   }
-
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+/* Custom utility classes referenced in JSX that Tailwind doesn't know about by default */
+@layer utilities {
+  .bg-card-glass {
+    background-color: hsl(var(--card-glass));
+    backdrop-filter: blur(8px) saturate(1.08);
+    -webkit-backdrop-filter: blur(8px) saturate(1.08);
+  }
+  .bg-accent-glow {
+    background-color: hsl(var(--accent-glow));
+  }
+  .text-text-dimmed {
+    color: hsl(var(--text-dimmed));
+  }
+  .text-text-muted {
+    color: hsl(var(--text-muted));
+  }
+  .text-text-subtle {
+    color: hsl(var(--text-subtle));
   }
 }
